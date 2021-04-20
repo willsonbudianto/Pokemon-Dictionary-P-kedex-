@@ -1,4 +1,5 @@
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,6 +13,11 @@ class PokedexView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Pokemon Dictionary'),
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.search), onPressed: (){
+            showSearch(context: context, delegate: DataSearch());
+          })
+        ],
       ),
       body: BlocBuilder<PokeBloc, PokemonState>(
         builder: (context, state) {
@@ -50,6 +56,68 @@ class PokedexView extends StatelessWidget {
           }
         },
       ),
+    );
+  }
+}
+
+class DataSearch extends SearchDelegate <String>{
+  final pokemon = [
+    "bulbasaur",
+    "ivysaur",
+    "venusaur",
+    "chamandder",
+    "charmeleon",
+    "charizard",
+    "squirtle",
+    "wartortle",
+    "blastoise"
+  ];
+
+  final recents = [
+    "bulbasaur",
+    "chamandder",
+    "squirtle"
+  ];
+
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return[IconButton(icon: Icon(Icons.clear), onPressed: (){
+      query = "";
+    })];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(icon: AnimatedIcon(icon: AnimatedIcons.menu_arrow, progress: transitionAnimation), onPressed: (){
+      close(context, null);
+    });
+
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    final suggestionList = query.isEmpty?recents:pokemon.where((p) => p.startsWith(query)).toList();
+    
+    return ListView.builder(itemBuilder: (context, index) => ListTile(
+      onTap: (){
+        showResults(context);
+      },
+        leading: Icon(Icons.circle),
+    title: RichText(text: TextSpan(
+        text: suggestionList[index].substring(0, query.length),
+      style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+      children: [TextSpan(
+        text: suggestionList[index].substring(query.length),
+        style: TextStyle(color: Colors.grey)
+      )]),
+    ),
+    ),
+      itemCount: suggestionList.length,
     );
   }
 }
