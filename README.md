@@ -1,5 +1,8 @@
 # pokemon_app
 
+
+Pokédex (ポケモン図鑑 Pokemon Zukan, "Ensiklopedia Pokémon") adalah sebuah konsep dalam permainan Pokémon, berupa sebuah komputer katalog mini yang mutlak dimiliki oleh pemain untuk mengidentifikasi spesies Pokémon yang ditemuinya.
+
 Tugas Mandiri Mobile Programming Willson Budianto 535190023
 
 ## Getting Started
