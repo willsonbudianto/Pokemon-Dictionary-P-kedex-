@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
                 NvCubit(pokemonDetailsCubit: pokemonDetailsCubit)),
         BlocProvider(create: (context) => pokemonDetailsCubit)
       ], child: AppNavigator()),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
