@@ -96,7 +96,12 @@ class DataSearch extends SearchDelegate <String>{
 
   @override
   Widget buildResults(BuildContext context) {
-
+    return Card(
+      color: Colors.red,
+      child: Center(
+        child: Text(query),
+      ),
+    );
   }
 
   @override
