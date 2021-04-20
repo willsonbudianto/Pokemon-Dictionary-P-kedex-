@@ -14,8 +14,8 @@ class PokemonRepository {
     // pokemon?limit=200&offset=400
 
     final queryParameters = {
-      'limit': '200',
-      'offset': (pageIndex * 200).toString()
+      'limit': '151',
+      'offset': (pageIndex * 151).toString()
     };
 
     final uri = Uri.https(baseUrl, '/api/v2/pokemon', queryParameters);
