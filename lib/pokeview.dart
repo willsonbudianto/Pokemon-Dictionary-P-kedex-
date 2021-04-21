@@ -1,7 +1,8 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pokemon_app/data/detail.dart';
+import 'package:pokemon_app/data/responsepage.dart';
 
 import 'bloc/navigation.dart';
 import 'bloc/pokebloc.dart';
@@ -61,6 +62,7 @@ class PokedexView extends StatelessWidget {
 }
 
 class DataSearch extends SearchDelegate <String>{
+
   final pokemon = [
     "bulbasaur",
     "ivysaur",
@@ -107,20 +109,20 @@ class DataSearch extends SearchDelegate <String>{
   @override
   Widget buildSuggestions(BuildContext context) {
     final suggestionList = query.isEmpty?recents:pokemon.where((p) => p.startsWith(query)).toList();
-    
+
     return ListView.builder(itemBuilder: (context, index) => ListTile(
       onTap: (){
         showResults(context);
       },
-        leading: Icon(Icons.circle),
-    title: RichText(text: TextSpan(
-        text: suggestionList[index].substring(0, query.length),
-      style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-      children: [TextSpan(
-        text: suggestionList[index].substring(query.length),
-        style: TextStyle(color: Colors.grey)
-      )]),
-    ),
+      leading: Icon(Icons.circle),
+      title: RichText(text: TextSpan(
+          text: suggestionList[index].substring(0, query.length),
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          children: [TextSpan(
+              text: suggestionList[index].substring(query.length),
+              style: TextStyle(color: Colors.grey)
+          )]),
+      ),
     ),
       itemCount: suggestionList.length,
     );
